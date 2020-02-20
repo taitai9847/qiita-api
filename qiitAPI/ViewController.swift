@@ -79,6 +79,12 @@ class ViewController: UIViewController {
             secondVC.qiitaArticleUrl = qiitaOptURL
         }
     }
+    
+    @IBAction func unwindToSecondVC(_ unwindSegue: UIStoryboardSegue) {
+        if (unwindSegue.identifier == "back") {
+        }
+        // Use data from the view controller which initiated the unwind segue
+    }
 }
 
 

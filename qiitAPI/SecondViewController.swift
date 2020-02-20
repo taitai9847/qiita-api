@@ -30,4 +30,10 @@ class SecondViewController: UIViewController,WKUIDelegate {
             }
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "back") {
+            let backToVC = segue.destination as? ViewController
+        }
+    }
 }
