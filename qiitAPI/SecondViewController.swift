@@ -11,15 +11,9 @@ import WebKit
 
 class SecondViewController: UIViewController,WKUIDelegate {
     
-    var webView: WKWebView!
     var qiitaArticleUrl: String!
     
-    override func loadView() {
-        let webConfiguration = WKWebViewConfiguration()
-        webView = WKWebView(frame: .zero, configuration: webConfiguration)
-        webView.uiDelegate = self
-        view = webView
-    }
+    @IBOutlet weak var webView: WKWebView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,10 +24,7 @@ class SecondViewController: UIViewController,WKUIDelegate {
             }
         }
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "back") {
-            let backToVC = segue.destination as? ViewController
-        }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
 }
