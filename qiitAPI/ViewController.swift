@@ -63,7 +63,6 @@ class ViewController: UIViewController {
         //tableviwにUITableDataSourceとUITableDelegateを適用する
         tableView.dataSource = self
         tableView.delegate = self
-        title = "最新記事"
         Qiita.fetchArticle { (articles) in
             self.articles = articles
             // tableViewの更新
@@ -82,7 +81,8 @@ class ViewController: UIViewController {
     
     @IBAction func unwindToSecondVC(_ unwindSegue: UIStoryboardSegue) {
         if (unwindSegue.identifier == "back") {
-             let sourceViewController = unwindSegue.source
+            let sourceViewController = unwindSegue.source
+            print(sourceViewController)
         }
         // Use data from the view controller which initiated the unwind segue
     }
@@ -94,7 +94,7 @@ extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articles.count
     }
-        
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
         let article = articles[indexPath.row]
@@ -108,18 +108,12 @@ extension ViewController: UITableViewDataSource {
 //セルが選択された時の挙動
 extension ViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if let urlText = articles[0].url as? Optional< Any>{
-//            qiitaURL = urlText as? String
-//            print(qiitaURL)
-//        }else{
-//            qiitaURL = "https://qiita.com/"
-//        }
-        //選択されたセルのindexpathからrowを取り出す、。それがarticlesが配列からrowに一致するarticleを取り出す。それをqiitaURLにセットする。
+    //選択されたセルのindexpathからrowを取り出す、。それがarticlesが配列からrowに一致するarticleを取り出す。それをqiitaURLにセットする。
         let row: Int = indexPath.row
         let article: Article = articles[row]
         let qiitaUrl: String = article.url
         self.qiitaURL = qiitaUrl
         performSegue(withIdentifier: "toSecondViewController",sender: self)
-           tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
